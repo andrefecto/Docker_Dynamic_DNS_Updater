@@ -4,7 +4,11 @@ Super lightweight and portable Dynamic DNS updater.
 
 ## Getting Started
 
-This image is currently in early beta and is super simple. There isn't a lot of error checking and not a lot of features. To use it, pull the latest image or build your own with the DockerFile.
+This image is currently in early beta and is super simple. There isn't a lot of error checking and not a lot of features. To use it, pull the latest image or build your own with the DockerFile. Currently this docker container only support DigitalOcean. You will need a few things:
+* Access Token for DigitalOcean API
+* Domain (like example.me)
+* subdomain (like test which combined with domain makes test.example.me)
+* Record ID (ID of the subdomain from the DigitalOcean API)
 
 ### Running
 
@@ -39,6 +43,20 @@ services:
 ```
 docker logs <container_name_here>
 ```
+
+### Example Docker Compose:
+```
+version: '3.3'
+services:
+    digital_ocean_dyndns:
+        environment:
+            - 'ACCESS_TOKEN=123918232token'
+            - 'DOMAIN=andrefecto.me'
+            - 'SUBDOMAIN=test123'
+            - 'RECORD_ID=31238951'
+        image: andrefecto/dynamic_dns_updater
+```
+
 
 ## Contributing
 
