@@ -1,8 +1,7 @@
 FROM alpine:latest
 RUN apk update && apk add bash jq curl
-COPY dyn_dns.sh /opt/dyn_dns.sh
+ADD src /opt/dyn_dns
 RUN adduser -D dyndns_user
-RUN chown dyndns_user:dyndns_user /opt/dyn_dns.sh
-RUN chmod 550 /opt/dyn_dns.sh
+RUN chown -R dyndns_user:dyndns_user /opt/dyn_dns && chmod 550 -R /opt/dyn_dns
 USER dyndns_user
-ENTRYPOINT ["/opt/dyn_dns.sh"]
+ENTRYPOINT ["/opt/dyn_dns/dyn_dns.sh"]
